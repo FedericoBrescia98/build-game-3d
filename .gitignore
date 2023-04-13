@@ -10,6 +10,12 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 
+# My ignore
+/[Aa]ssets/[Ee]xternal/
+/[Aa]ssets/[Ii]cons/
+/[Aa]ssets/[Tt]exture/
+/[Aa]ssets/[Ss]ounds/
+
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
