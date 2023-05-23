@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5940c3340dbfdb4419e2895c3f96b20a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - BuildingData: {instanceID: 0}
+  - BuildingTransform: {instanceID: 0}
+  - Person: {instanceID: 0}
+  - _blinkMaterial: {fileID: 2100000, guid: 61ef303d41f0e4e4a8b219120cd025e5, type: 2}
+  - basePerson: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
