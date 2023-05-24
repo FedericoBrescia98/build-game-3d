@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 2458630070251392276}
   - component: {fileID: -1665500683839847198}
   - component: {fileID: -4794174082431810219}
+  - component: {fileID: 6331426075809895530}
   m_Layer: 0
   m_Name: Sunflower_Field
   m_TagString: Untagged
@@ -405,7 +406,7 @@ MeshCollider:
   m_GameObject: {fileID: 7640444777768187687}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: -1
@@ -463,3 +464,16 @@ OffMeshLink:
   m_BiDirectional: 1
   m_Activated: 1
   m_AutoUpdatePositions: 0
+--- !u!65 &6331426075809895530
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7640444777768187687}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.216192, y: 16.34518, z: 16.785242}
+  m_Center: {x: -0.014330387, y: 8.161743, z: -0.07164669}

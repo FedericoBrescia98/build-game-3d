@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 8639842977133161191}
   - component: {fileID: 7105045457012561514}
   - component: {fileID: 5097786174900089592}
+  - component: {fileID: 8846433989348931778}
   m_Layer: 6
   m_Name: Corn_Field
   m_TagString: Building
@@ -421,7 +422,7 @@ MeshCollider:
   m_GameObject: {fileID: 8874214115969718196}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: -1
@@ -463,3 +464,16 @@ OffMeshLink:
   m_BiDirectional: 1
   m_Activated: 1
   m_AutoUpdatePositions: 0
+--- !u!65 &8846433989348931778
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8874214115969718196}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.216192, y: 16.02987, z: 16.785238}
+  m_Center: {x: -0.11647797, y: 8.001446, z: 0.03355217}

@@ -16,11 +16,13 @@ public class SavingsManager : MonoBehaviour
     [SerializeField] private Person basePerson;
     [SerializeField] private Building tempBuilding;
     [SerializeField] private List<Building> possibleBuildings;
+    [SerializeField] private GameObject saveText;
 
     private int _prevHour = 0;
 
     private void Start()
     {
+        Time.timeScale = 0;
         int load = PlayerPrefs.GetInt("masterLoad");
         if (load == 1)
         {
@@ -37,14 +39,15 @@ public class SavingsManager : MonoBehaviour
     {
         if (_timeController.CurrentTime.Hour > _prevHour + 12)
         {
+            Time.timeScale = 0;
             _prevHour = _timeController.CurrentTime.Hour;
             _ = SaveGameAsync();
-            Debug.Log("Game saved!");
         }
     }
 
     public async Task SaveGameAsync()
     {
+        saveText.SetActive(true);
         List<string> freeWorkers = new List<string>();
         foreach (Person person in _inventoryData.FreeWorkers)
         {
@@ -99,6 +102,9 @@ public class SavingsManager : MonoBehaviour
                 await streamWriter.WriteAsync(stringBuilder.ToString());
             }
         }
+
+        saveText.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public async Task LoadGameAsync()
@@ -114,25 +120,28 @@ public class SavingsManager : MonoBehaviour
                 foreach (Building posBuilding in possibleBuildings)
                 {
                     Building controlBuilding = tempBuilding.FromJson(building);
-                    if(controlBuilding.BuildingData.Name == posBuilding.BuildingData.Name)
-                    {   
+                    if (controlBuilding.BuildingData.Name == posBuilding.BuildingData.Name)
+                    {
                         Building newBuilding = Instantiate(posBuilding, controlBuilding.BuildingTransform.position,
                             controlBuilding.BuildingTransform.rotation);
-                        if(newBuilding.BuildingData.ObjectId == 100)
+                        if (newBuilding.BuildingData.ObjectId == 100)
                         {
-                            Person newPerson = Instantiate(newBuilding.Person, newBuilding.Person.PersonTransform.position, newBuilding.Person.PersonTransform.rotation);
+                            Person newPerson = Instantiate(newBuilding.Person,
+                                newBuilding.Person.PersonTransform.position,
+                                newBuilding.Person.PersonTransform.rotation);
                             newBuilding.AssignHousePerson(newPerson);
                             newPerson.HomePosition = newBuilding.BuildingTransform.position;
                             _inventoryData.FreeWorkers.Add(newPerson);
                             _inventoryData.TotalWorkers.Add(newPerson);
                         }
-                        else if(newBuilding.BuildingData.ObjectId > 100)
+                        else if (newBuilding.BuildingData.ObjectId > 100)
                         {
                             Person newPerson = _inventoryData.FreeWorkers.First();
                             newBuilding.AssignWorkPerson(newPerson);
                             newPerson.WorkPosition = newBuilding.BuildingTransform.position;
                             _inventoryData.FreeWorkers.Remove(newBuilding.Person);
                         }
+
                         allBuildings.Add(newBuilding);
                     }
                 }
@@ -141,44 +150,47 @@ public class SavingsManager : MonoBehaviour
             _buildingSystem.AllBuildings = allBuildings;
             await LoadMapAsync("savedMap.txt");
         }
+
+        Time.timeScale = 1;
     }
 
     private async Task LoadMapAsync(string fileName)
     {
-            var stringBuilder = new StringBuilder();
-            TerrainData terrainData = _terrain.terrainData;
-            int w = terrainData.alphamapResolution;
-            int h = terrainData.alphamapResolution;
-            int q = terrainData.alphamapLayers;
-            float[,,] tData = terrainData.GetAlphamaps(0, 0, w, h);
-            char[] result;
+        var stringBuilder = new StringBuilder();
+        TerrainData terrainData = _terrain.terrainData;
+        int w = terrainData.alphamapResolution;
+        int h = terrainData.alphamapResolution;
+        int q = terrainData.alphamapLayers;
+        float[,,] tData = terrainData.GetAlphamaps(0, 0, w, h);
+        char[] result;
 
-            using (FileStream file = File.Open(Application.dataPath + "/" + fileName, FileMode.Open, FileAccess.Read))
+        using (FileStream file = File.Open(Application.dataPath + "/" + fileName, FileMode.Open, FileAccess.Read))
+        {
+            using (StreamReader streamReader = new StreamReader(file, Encoding.UTF8))
             {
-                using (StreamReader streamReader = new StreamReader(file, Encoding.UTF8))
+                result = new char[streamReader.BaseStream.Length];
+                await streamReader.ReadAsync(result, 0, (int)streamReader.BaseStream.Length);
+                stringBuilder.Append(result);
+            }
+        }
+
+        string map = stringBuilder.ToString();
+        List<string> values = map.Split(";\n").ToList();
+        int index = 0;
+        for (var y = 0; y < h; y++)
+        {
+            for (var x = 0; x < w; x++)
+            {
+                for (var z = 0; z < q; z++)
                 {
-                    result = new char[streamReader.BaseStream.Length];
-                    await streamReader.ReadAsync(result, 0, (int)streamReader.BaseStream.Length);
-                    stringBuilder.Append(result);
+                    tData[x, y, z] = float.Parse(values[index]);
+                    index++;
                 }
             }
+        }
 
-            string map = stringBuilder.ToString();
-            List<string> values = map.Split(";\n").ToList();
-            int index = 0;
-            for (var y = 0; y < h; y++)
-            {
-                for (var x = 0; x < w; x++)
-                {
-                    for (var z = 0; z < q; z++)
-                    {
-                        tData[x, y, z] = float.Parse(values[index]);
-                        index++;
-                    }
-                }
-            }
-
-            _terrain.terrainData.SetAlphamaps(0, 0, tData);
+        _terrain.terrainData.SetAlphamaps(0, 0, tData);
+        Time.timeScale = 1;
     }
 
     [Serializable]

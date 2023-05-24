@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: -8271749068444739681}
   - component: {fileID: 1425405877267420755}
   - component: {fileID: -3334655417906499282}
+  - component: {fileID: 7613623782267900720}
   m_Layer: 0
   m_Name: Tomatoes_Field
   m_TagString: Untagged
@@ -357,7 +358,7 @@ MeshCollider:
   m_GameObject: {fileID: 8139701784888517170}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: -1
@@ -415,6 +416,19 @@ OffMeshLink:
   m_BiDirectional: 1
   m_Activated: 1
   m_AutoUpdatePositions: 0
+--- !u!65 &7613623782267900720
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8139701784888517170}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.216173, y: 16.322134, z: 16.78524}
+  m_Center: {x: 0.040828705, y: 8.15022, z: -0.2408905}
 --- !u!1 &9123237992322355101
 GameObject:
   m_ObjectHideFlags: 0

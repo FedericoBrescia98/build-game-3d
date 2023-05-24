@@ -658,8 +658,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6431474060611562168}
-  m_LocalRotation: {x: 0, y: 0.04549779, z: 0, w: 0.9989645}
-  m_LocalPosition: {x: 31.295067, y: 15.266667, z: 49.841545}
+  m_LocalRotation: {x: 0, y: 0.9965645, z: 0, w: 0.08282103}
+  m_LocalPosition: {x: 33.85343, y: 15.266667, z: 53.386818}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -731,8 +731,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PersonTransform: {fileID: 6431474060611532632}
-  HomePosition: {x: 31.315935, y: 14.862967, z: 30.83946}
-  WorkPosition: {x: 40.057777, y: 14.893488, z: 70.991745}
+  HomePosition: {x: 33.85343, y: 14.893487, z: 53.386818}
+  WorkPosition: {x: 77.57902, y: 14.679851, z: 107.8346}
   NavMeshAgent: {fileID: 239439083599959541}
   Animator: {fileID: 6431474060604299468}
   IsWalking: 0
